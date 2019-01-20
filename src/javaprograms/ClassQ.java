@@ -27,7 +27,7 @@ import java.util.Scanner;
         HashMap<Integer,pair> map =new HashMap<Integer,pair>();
         for(int i=0;i<n;i++)
         {
-            for(int j=i+1;j<n;j++)
+            for(int j=i+1;j<n-1;j++)
             {
                 int sum=arr[i]+arr[j];
                 if(!map.containsKey(sum))
