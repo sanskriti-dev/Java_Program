@@ -1,0 +1,53 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Graph
+{
+	private int V;
+	private LinkedList adj[];
+	Graph(int v)
+	{
+		V=v;
+		adj = new LinkedList[v];
+		for(int i=0;i<v;i++)
+		{
+			adj[i] = new LinkedList();
+		}
+	} 
+	void addEdge(int v,int w)
+	{
+		adj[v].add(w);
+	}
+	void DfsUtil(int s , boolean[] visited)
+	{
+		System.out.print(s+" ");
+		visited[s]=true;
+		Iterator<Integer> i = adj[s].listIterator();
+		while(i.hasNext())
+		{
+			int n= i.next();
+			if(!visited[n])
+			DfsUtil(n,visited);
+		}
+	}
+	void dfs(int s)
+	{
+		boolean visited[]=new boolean[V];
+		DfsUtil(s,visited);
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+             Graph g = new Graph(4);
+            g.addEdge(0, 1); 
+        g.addEdge(0, 2); 
+        g.addEdge(1, 2); 
+        g.addEdge(2, 0); 
+        g.addEdge(2, 3); 
+        g.addEdge(3, 3);
+             g.dfs(2);
+	}
+}
