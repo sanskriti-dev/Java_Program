@@ -1,0 +1,69 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Graph
+{
+	private int V;
+	private LinkedList adj[];
+	Graph(int v)
+	{
+		V=v;
+		adj = new LinkedList[v];
+		for(int i=0;i<v;i++)
+		{
+			adj[i]=new LinkedList();
+		}
+	}
+	void addEdge(int v,int w)
+	{
+		adj[v].add(w);
+		adj[w].add(v);
+	}
+	boolean iscycleutil(int s,boolean[] visited , int parent)
+	{
+		visited[s]=true;
+		Iterator<Integer> i = adj[s].listIterator();
+		while(i.hasNext())
+		{
+			int n = i.next();
+			if(!visited[n])
+			  {
+			  	if(iscycleutil(n,visited,s))
+			  	return true;
+			  }
+			  else if(n!=parent)
+			  return true;
+			
+			
+		}
+		return false;
+	}
+	boolean iscycle()
+	{
+	   boolean visited[]=new boolean[V];
+	   for(int i=0;i<V;i++)
+	   {
+	   	if(!visited[i])
+	   	{
+	    if(iscycleutil(i,visited,-1))
+	    return true;
+	   }
+	    
+	}
+	return false;
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	  Graph g2 = new Graph(3); 
+        g2.addEdge(0, 1); 
+        g2.addEdge(1, 2); 
+        if (g2.iscycle()) 
+        System.out.println("Graph contains Cycle");
+        else
+        System.out.println("Graph does not contains Cycle");
+    }
+}
