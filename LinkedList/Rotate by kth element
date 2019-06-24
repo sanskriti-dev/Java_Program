@@ -1,0 +1,79 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class LinkedList
+{
+	Node head;
+	static class Node {
+		int data;
+		Node next;
+		Node(int d)
+		{
+			data=d;
+			next=null;
+		}
+	}
+	void addtolast(Node a)
+	{
+		if(head == null)
+		head = a;
+		else
+		{
+			Node n = head;
+			while(n.next!=null)
+			  n= n.next;
+			  n.next=a;
+		}
+	}
+	Node rotate(Node head , int k)
+	{
+	    Node n=head;
+	    Node p =null;
+	    Node q=null;
+	    int count=0;
+		while(n!=null)
+		{
+			count++;
+			if(count == k)
+			{
+			p=n;
+			}
+			if(count == k+1)
+			{
+			q=n;
+			}
+			if(n.next == null)
+			{
+			break;
+			}
+			n=n.next;
+		}
+		p.next=null;
+		n.next=head;
+		head =q;
+		return head;
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n= sc.nextInt();
+		LinkedList l=new LinkedList();
+		l.head=new Node(sc.nextInt());
+		for(int i =1;i<n;i++)
+		{
+			int a = sc.nextInt();
+			l.addtolast(new Node(a));
+		}
+		int k = sc.nextInt();
+	   Node p = l.rotate(l.head,k);
+	   while(p!=null)
+	   {
+	   System.out.print(p.data + " ");
+	   p=p.next;
+	   }
+	}
+}
