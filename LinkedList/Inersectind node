@@ -1,0 +1,97 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class LinkedList
+{
+	Node head1;
+	Node head2;
+	Node head3;
+	static class Node {
+		int data;
+		Node next;
+		Node(int d)
+		{
+			data=d;
+			next=null;
+		}
+	}
+	void addToLast (Node head, Node a)
+	{
+
+	 	Node n = head;
+	 	while(n.next!=null)
+	 	{
+	 	n=n.next;	
+	 	}
+	 	n.next=a;
+	 
+	}
+	
+	int intersect ( Node head1,Node head2)
+	{
+		Node n=head1;
+		Node n1 =head2;
+		int s=-1;
+		int flag=0;
+		while(n!=null)
+		{
+			n.data=n.data*(-1);
+			n=n.next;
+		}
+		while(n1!=null)
+		{
+			if(n1.data<0)
+			{
+				s=n1.data;
+				break;
+			}
+			n1=n1.next;
+		}
+		return s;
+	}
+  public static void main (String[] args) throws java.lang.Exception
+	{
+	    Scanner sc = new Scanner(System.in);
+		int n= sc.nextInt();
+		int m = sc.nextInt();
+		int p=sc.nextInt();
+		LinkedList l=new LinkedList();
+		l.head1=new Node(sc.nextInt());
+		for(int i=1;i<n;i++)
+		{
+			int a = sc.nextInt();
+			l.addToLast(l.head1,new Node(a));
+		}
+		l.head2=new Node(sc.nextInt());
+		for(int i=1;i<m;i++)
+		{
+			int a = sc.nextInt();
+			l.addToLast(l.head2,new Node(a));
+		}
+		l.head3=new Node(sc.nextInt());
+			for(int i=1;i<p;i++)
+		{
+			int a = sc.nextInt();
+			l.addToLast(l.head3,new Node(a));
+		}
+		Node p1=l.head1;
+		Node q=l.head2;
+		while(p1.next!=null)
+		{
+			p1=p1.next;
+		}
+		p1.next=l.head3;
+		while(q.next!=null)
+		{
+			q=q.next;
+		}
+		q.next=l.head3;
+       int z = l.intersect(l.head1,l.head2);
+		System.out.println(z*-1);
+	
+	}
+}
