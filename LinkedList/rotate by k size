@@ -1,0 +1,112 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class LinkedList
+{
+	Node head;
+	static class Node {
+		int data;
+		Node next;
+		Node(int d)
+		{
+			data=d;
+			next=null;
+		}
+	}
+	void addToLast ( Node a)
+	{
+	 if (head==null)
+	 {
+	 	head = a;
+	 }
+	 else 
+	 {
+	 	Node n = head;
+	 	while(n.next!=null)
+	 	{
+	 	n=n.next;	
+	 	}
+	 	n.next=a;
+	 }
+	}
+	Node reverse(Node node, int k)
+    {
+        Node prev = node;
+       int  counter=0;
+        while(prev!=null)
+        {
+            counter++;
+            prev=prev.next;
+        }
+        Node q= null;
+        Node cur=node;
+        Node next1=null;
+        Node m=node;
+        int count=0;
+        int flag=0;
+        while(cur!=null)
+        { 
+            count++;
+            next1=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=next1;
+            if(count==1)
+            {
+              m=prev;
+            }
+            if(count == k && flag==0)
+            {
+                node=prev;
+                q=m;
+                flag=1;
+                count=0;
+                prev=null;
+                next1=null;
+                int s = counter-k;
+                if(s<k)
+                k=s;
+                else
+                counter=s;
+            }
+            if(count == k)
+            {
+             q.next=prev;
+             q=m;
+             count=0;
+             prev=null;
+             next1=null;
+              int s = counter-k;
+                if(s<k)
+                k=s;
+                else
+                counter=s;
+            }
+        }
+        return node;
+    }
+
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	    Scanner sc = new Scanner(System.in);
+		int n= sc.nextInt();
+		LinkedList l=new LinkedList();
+		l.head=new Node(sc.nextInt());
+		for(int i=1;i<n;i++)
+		{
+			int a = sc.nextInt();
+			l.addToLast(new Node(a));
+		}
+		int k=sc.nextInt();
+		Node z = l.reverse(l.head, k);
+		while(z!=null)
+		{
+			System.out.print(" "+z.data);
+			z=z.next;
+		}
+	}
+}
