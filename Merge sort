@@ -1,0 +1,81 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	void Merge(int a[] ,int beg ,int mid,int end)
+	{
+		int l = mid-beg+1;
+		int r = end-mid;
+		int left[] = new int[l];
+		int right[] = new int[r];
+		for(int i=0;i<l;i++)
+		{
+			left[i]=a[beg+i];
+		}
+		for(int i=0;i<r;i++)
+		{
+			right[i]=a[mid+i+1];
+		}
+		int i=0,j=0,k=beg;
+		while(i<l&&j<r)
+		{
+			if(left[i]<=right[j])
+			{
+				a[k]=left[i];
+				i++;
+			}
+			else
+			{
+				a[k]=right[j];
+				j++;
+			}
+			k++;
+			
+		}
+		while(i<l)
+		{
+			a[k]=left[i];
+			i++;
+			k++;
+		}
+		while(j<r)
+		
+		{
+			a[k]=right[j];
+			j++;
+			k++;
+		}
+	}
+	void Mergesort(int a[],int beg,int end)
+	{
+		if(beg<end)
+		{
+			int mid=(beg+end)/2;
+            Mergesort(a,beg,mid);
+		    Mergesort(a,mid+1,end);
+		    Merge(a,beg,mid,end);
+		}
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		Ideone l = new Ideone();
+		int n= sc.nextInt();
+		int a[]=new int[n];
+		for (int i =0;i<n;i++)
+		{
+		  a[i]=sc.nextInt();
+        }
+		l.Mergesort(a,0,n-1);
+		  for(int i =0 ;i<n;i++)
+		  {
+		  	System.out.print(" " +a[i]);
+		  }
+		  
+	}
+}
