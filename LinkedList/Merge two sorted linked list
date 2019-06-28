@@ -1,0 +1,104 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class LinkedList
+{
+	Node headA;
+	Node headB;
+	static class Node
+	{
+		int data;
+		Node next;
+		Node(int d)
+		{
+			data=d;
+			next=null;
+		}
+	}
+	void addtolist(Node head,Node a)
+	{
+		Node n=head;
+		while(n.next!=null)
+		{
+			n=n.next;
+		}
+		n.next = a;
+	}
+	Node Merge(Node p ,Node q)
+	{
+		Node s =null;
+		Node s1=null;
+
+			if(p.data<=q.data)
+			{
+				s=p;
+				p=p.next;
+			}
+			else
+			{
+				s=q;
+				q=q.next;
+			}
+		
+		s1=s;
+		while(p!=null && q!=null)
+		{
+			if(p.data<=q.data)
+			{
+				s.next=p;
+				s=p;
+				p=p.next;
+			}
+			else
+			{
+				s.next=q;
+				s=q;
+				q=q.next;
+			}
+		}
+		if(p==null)
+		s.next=q;
+		if(q==null)
+		s.next=p;
+		return s1;
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n =sc.nextInt();
+		int m = sc.nextInt();
+		LinkedList l =new LinkedList();
+		l.headA= new Node(sc.nextInt());
+		for(int i=1;i<n;i++)
+		{
+			l.addtolist(l.headA,new Node(sc.nextInt()));
+		}
+		l.headB = new Node(sc.nextInt());
+		for(int i=1;i<m;i++)
+		{
+			l.addtolist(l.headB,new Node(sc.nextInt()));
+		}
+		// Node p1=l.headA;
+		// Node p2=l.headB;
+		// while(p1!=null)
+		// {
+		// 	System.out.print(p1.data);
+		// 	p1=p1.next;
+		// }
+		// while(p2!=null)
+		// {
+		// 	System.out.print(p2.data);
+		// 	p2=p2.next;
+		// }
+		Node z= l.Merge(l.headA,l.headB);
+		while(z!=null)
+		{
+			System.out.print(z.data+" ");
+			z=z.next;
+		}
+	}
+}
