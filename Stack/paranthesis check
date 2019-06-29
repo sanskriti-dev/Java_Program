@@ -1,0 +1,81 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+      int top=-1;
+    ArrayList<Character> l=new ArrayList<Character>();
+    void push(char s)
+    {
+        if((s == ')' || s == '}' || s == ']' )&& top!=-1)
+        {
+            if(s==')')
+            {
+            if(l.get(top) == '(')
+            {
+             l.remove(top);
+             top--;
+            }
+            else
+            top=-2;
+            }
+            else if(s==']')
+            {
+            if(l.get(top) == '[')
+            {
+             
+             l.remove(top);
+             top--;
+            }
+            else
+            top=-2;
+            }
+            else 
+            {
+            if(l.get(top) == '{')
+            {
+             l.remove(top);
+             top--;
+            }
+            else
+            top=-2;
+            
+            }
+        }
+        
+        else
+        {
+            l.add(s);
+            top=top+1;
+          
+        }
+    }
+	public static void main (String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n=sc.nextInt();
+		sc.nextLine();
+		while(n>0)
+		{
+		    GFG g =new GFG();
+		    String s1 = sc.nextLine();
+		    char s[]=s1.toCharArray();
+		    for(int i=0;i<s.length;i++)
+		    {
+		        g.push(s[i]);
+		        if(g.top==-2)
+		        {
+		             i=s.length;
+		        }
+		    }
+		    if(g.top ==-1)
+		    System.out.println("balanced");
+		    else
+		    System.out.println("not balanced");
+		   
+		    n--;
+		    
+		}
+	}
+}
