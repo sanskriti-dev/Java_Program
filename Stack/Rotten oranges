@@ -1,0 +1,143 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    int R,C;
+    static class ele {
+        int x;
+        int y;
+        ele(int X, int Y)
+        {
+            x=X;
+            y=Y;
+        }
+    }
+    boolean isdem(ele temp)
+    {
+        if(temp.x==-1 && temp.y==-1)
+        return true;
+        else
+        return false;
+    }
+     boolean isvalid(int x ,int y)
+    {
+       if((x>=0 && y>=0) && (x<R && y<C))
+       return true;
+       else
+       return false;
+    }
+    boolean checkAll( int a[][])
+    {
+         for(int i=0;i<R;i++)
+        {
+            for(int j=0;j<C;j++)
+            {
+                if(a[i][j]==1)
+                 return false;
+            }
+        }
+        return true;
+    }
+    int rotten(int a[][])
+    {
+        Queue<ele> q = new LinkedList<>();
+        for(int i=0;i<R;i++)
+        {
+            for(int j=0;j<C;j++)
+            {
+                if(a[i][j]==2)
+                 q.add(new ele(i,j));
+            }
+        }
+        q.add(new ele(-1,-1));
+        int flag=0;
+        int ans=0;
+        while(!q.isEmpty())
+        {
+            flag=0;
+        while(!isdem(q.peek()))
+        {
+            ele a1 = q.peek();
+            q.remove();
+            if(isvalid(a1.x+1,a1.y) &&  a[a1.x+1][a1.y]==1)
+            {
+                a[a1.x+1][a1.y]=2;
+                q.add(new ele(a1.x+1,a1.y));
+                if(flag==0)
+                {
+                flag=1;
+                ans=ans+1;
+                }
+                
+            }
+             if(isvalid(a1.x-1,a1.y) &&  a[a1.x-1][a1.y]==1)
+            {
+                a[a1.x-1][a1.y]=2;
+                q.add(new ele(a1.x-1,a1.y));
+                 if(flag==0)
+                {
+                flag=1;
+                ans=ans+1;
+                }
+                
+            }
+             if(isvalid(a1.x,a1.y+1) &&  a[a1.x][a1.y+1]==1)
+            {
+                a[a1.x][a1.y+1]=2;
+                q.add(new ele(a1.x,a1.y+1));
+                 if(flag==0)
+                {
+                flag=1;
+                ans=ans+1;
+                }
+                
+            }
+             if(isvalid(a1.x,a1.y-1) &&  a[a1.x][a1.y-1]==1)
+            {
+                a[a1.x][a1.y-1]=2;
+                q.add(new ele(a1.x,a1.y-1));
+                if(flag==0)
+                {
+                flag=1;
+                ans=ans+1;
+                }
+                
+            }
+        }
+        q.remove();
+        if(!q.isEmpty())
+        q.add(new ele(-1,-1));
+        }
+        if(checkAll(a))
+        return ans;
+        else
+        return -1;
+    }
+    
+	public static void main (String[] args) {
+	  Scanner sc = new Scanner(System.in);
+	  int t = sc.nextInt();
+	  while(t>0)
+	  {
+	      GFG g = new GFG();
+	      int r =sc.nextInt();
+	      int c = sc.nextInt();
+	      g.R=r;
+	      g.C=c;
+	      int a[][] = new int[r][c];
+	      for(int i =0;i<r;i++)
+	      {
+	          for(int j=0;j<c;j++)
+	          {
+	              a[i][j]=sc.nextInt();
+	          }
+	      }
+	      int ans = g.rotten(a);
+	      System.out.println(ans);
+	      t--;
+	  }
+	}
+}
