@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+#include<cmath>
+int main() {
+	int t;
+	cin>>t;
+	while(t>0)
+	{
+	    long int localsum=0,globalsum=0,n;
+	    cin>>n;
+	    long int a[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>a[i];
+	    }
+	    localsum=a[0],globalsum=a[0];
+	    for(int i=1;i<n;i++)
+	    {
+	        localsum = a[i]>localsum+a[i] ? a[i] : localsum+a[i];
+	        globalsum = globalsum>localsum ? globalsum : localsum;
+	    }
+	    cout<<globalsum;
+	    cout<<endl;
+	    
+	    t--;
+	}
+	return 0;
+}
