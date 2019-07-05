@@ -1,0 +1,56 @@
+#define ll long long
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	long long n,m;
+	 while(t--)
+	 {
+	     cin>>n>>m;
+	     long long a1[n];
+	    long long a2[m];
+	     for(int i=0;i<n;i++)
+	    {
+	        cin>>a1[i];
+	    }
+	    for(int j=0;j<m;j++)
+	    {
+	        cin>>a2[j];
+	    }
+	     int i=0,j=0;
+	     while(i<n && j<m)
+	    {
+	        if(a1[i]<a2[j])
+	        {
+	            cout << a1[i++] << " ";
+	            
+	        }
+	        else if(a1[i]>a2[j])
+	        {
+	             cout << a2[j++]<< " ";
+	             
+	            
+	        }
+	        else
+	        {
+	            cout << a1[i++]<<" ";
+	            cout << a2[j++]<<" ";
+	            
+	        }
+	  }
+	  
+	    
+	     if(i<n)
+	     {
+	         for(int s=i;s<n;s++) cout << a1[s] << " ";
+	     }
+	     if(j<n)
+	     {
+	         for(int s1=j;s1<m;s1++) cout << a2[s1] << " ";
+	     }
+	     cout << endl;
+	     
+	 }
+	return 0;
+}
