@@ -1,0 +1,33 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+		Scanner sc =new Scanner(System.in);
+		int t = sc.nextInt();
+		sc.nextLine();
+		while(t>0)
+		{
+		    char s[] =sc.nextLine().toCharArray();
+		    HashSet<Character> s1 = new HashSet<Character>();
+		    for(int i=0;i<s.length;i++)
+		    {
+		        if(!s1.contains(s[i]))
+		        {
+		            System.out.print(s[i]);
+		            s1.add(s[i]);
+		        }
+		        
+		    }
+		    System.out.println();
+		    
+		    
+		    
+		    
+		    t--;
+		}
+	}
+}
